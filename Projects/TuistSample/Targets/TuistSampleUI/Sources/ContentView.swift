@@ -1,4 +1,5 @@
 import SwiftUI
+import TuistSampleKit
 
 public struct ContentView: View {
     public init() {}
@@ -6,6 +7,7 @@ public struct ContentView: View {
     public var body: some View {
         Text("Hello, World!")
             .padding()
+            .onAppear(perform: TuistSampleKit.hello)
     }
 }
 
