@@ -24,6 +24,8 @@ import MyPlugin
 let localHelper = LocalHelper(name: "MyPlugin")
 
 // Creates our project using a helper function defined in ProjectDescriptionHelpers
-let project = Project.app(name: "TuistSample",
-                          platform: .iOS,
-                          additionalTargets: ["TuistSampleKit", "TuistSampleUI"])
+let project = Project.app(
+    name: "TuistSample",
+    platform: .iOS,
+    additionalTargets: ["TuistSampleKit", "TuistSampleUI"]
+)
