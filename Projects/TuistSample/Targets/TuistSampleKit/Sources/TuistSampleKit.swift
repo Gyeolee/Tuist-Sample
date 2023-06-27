@@ -6,7 +6,7 @@ public final class TuistSampleKit {
         
 #if DEBUG
         print("DEBUG")
-#elseif RELEASE
+#else
         print("RELEASE")
 #endif
     }

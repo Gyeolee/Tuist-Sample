@@ -8,14 +8,19 @@ import ProjectDescription
 extension Project {
     /// Helper function to create the Project for this ExampleApp
     public static func app(name: String, platform: Platform, additionalTargets: [String]) -> Project {
-        var targets = makeAppTargets(name: name,
-                                     platform: platform,
-                                     dependencies: additionalTargets.map { TargetDependency.target(name: $0) })
+        var targets = makeAppTargets(
+            name: name,
+            platform: platform,
+            dependencies: additionalTargets.map { TargetDependency.target(name: $0) }
+        )
         targets += additionalTargets.flatMap { makeFrameworkTargets(name: $0, platform: platform) }
+        
         return Project(
             name: name,
             organizationName: "tuist.io",
-            targets: targets
+            options: .options(automaticSchemesOptions: .disabled),
+            targets: targets,
+            schemes: makeAppSchemes(appName: name)
         )
     }
 
@@ -45,7 +50,7 @@ extension Project {
             dependencies: [.target(name: name)]
         )
         
-        return [sources, tests]
+        return [sources]
     }
 
     /// Helper function to create the application target and the unit test target.
@@ -79,6 +84,31 @@ extension Project {
             dependencies: [.target(name: "\(name)")]
         )
         
-        return [mainTarget, testTarget]
+        return [mainTarget]
+    }
+}
+
+extension Project {
+    
+    private static func makeAppSchemes(appName: String) -> [Scheme] {
+        let developmentScheme = Scheme(
+            name: "Development",
+            shared: true,
+            buildAction: .buildAction(targets: ["\(appName)"])
+        )
+        
+        let stagingScheme = Scheme(
+            name: "Staging",
+            shared: true,
+            buildAction: .buildAction(targets: ["\(appName)"])
+        )
+        
+        let productionScheme = Scheme(
+            name: "Production",
+            shared: true,
+            buildAction: .buildAction(targets: ["\(appName)"])
+        )
+        
+        return [developmentScheme, stagingScheme, productionScheme]
     }
 }
