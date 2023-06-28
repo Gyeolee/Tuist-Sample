@@ -19,6 +19,7 @@ extension Project {
             name: name,
             organizationName: "tuist.io",
             options: .options(automaticSchemesOptions: .disabled),
+            settings: .settings(configurations: configurations),
             targets: targets,
             schemes: makeAppSchemes(appName: name)
         )
@@ -94,19 +95,34 @@ extension Project {
         let developmentScheme = Scheme(
             name: "Development",
             shared: true,
-            buildAction: .buildAction(targets: ["\(appName)"])
+            buildAction: .buildAction(targets: ["\(appName)"]),
+            testAction: .targets([], configuration: .debugDevelopment),
+            runAction: .runAction(configuration: .debugDevelopment),
+            archiveAction: .archiveAction(configuration: .releaseDevelopment),
+            profileAction: .profileAction(configuration: .releaseDevelopment),
+            analyzeAction: .analyzeAction(configuration: .debugDevelopment)
         )
         
         let stagingScheme = Scheme(
             name: "Staging",
             shared: true,
-            buildAction: .buildAction(targets: ["\(appName)"])
+            buildAction: .buildAction(targets: ["\(appName)"]),
+            testAction: .targets([], configuration: .debugStaging),
+            runAction: .runAction(configuration: .debugStaging),
+            archiveAction: .archiveAction(configuration: .releaseStaging),
+            profileAction: .profileAction(configuration: .releaseStaging),
+            analyzeAction: .analyzeAction(configuration: .debugStaging)
         )
         
         let productionScheme = Scheme(
             name: "Production",
             shared: true,
-            buildAction: .buildAction(targets: ["\(appName)"])
+            buildAction: .buildAction(targets: ["\(appName)"]),
+            testAction: .targets([], configuration: .debugProduction),
+            runAction: .runAction(configuration: .debugProduction),
+            archiveAction: .archiveAction(configuration: .releaseProduction),
+            profileAction: .profileAction(configuration: .releaseProduction),
+            analyzeAction: .analyzeAction(configuration: .debugProduction)
         )
         
         return [developmentScheme, stagingScheme, productionScheme]
