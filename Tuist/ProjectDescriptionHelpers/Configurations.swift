@@ -17,11 +17,13 @@ extension ConfigurationName {
     static var releaseProduction: ConfigurationName { configuration("Release-Production") }
 }
 
+private let basePath: String = "Projects/TuistSample/Config"
+
 let configurations: [Configuration] = [
-    .debug(name: .debugDevelopment),
-    .debug(name: .debugStaging),
-    .debug(name: .debugProduction),
-    .release(name: .releaseDevelopment),
-    .release(name: .releaseStaging),
-    .release(name: .releaseProduction)
+    .debug(name: .debugDevelopment, xcconfig: .relativeToRoot("\(basePath)/Development/Development.xcconfig")),
+    .debug(name: .debugStaging, xcconfig: .relativeToRoot("\(basePath)/Staging/Staging.xcconfig")),
+    .debug(name: .debugProduction, xcconfig: .relativeToRoot("\(basePath)/Production/Production.xcconfig")),
+    .release(name: .releaseDevelopment, xcconfig: .relativeToRoot("\(basePath)/Development/Development.xcconfig")),
+    .release(name: .releaseStaging, xcconfig: .relativeToRoot("\(basePath)/Staging/Staging.xcconfig")),
+    .release(name: .releaseProduction, xcconfig: .relativeToRoot("\(basePath)/Production/Production.xcconfig"))
 ]
