@@ -27,3 +27,8 @@ let configurations: [Configuration] = [
     .release(name: .releaseStaging, xcconfig: .relativeToRoot("\(basePath)/Staging/Staging.xcconfig")),
     .release(name: .releaseProduction, xcconfig: .relativeToRoot("\(basePath)/Production/Production.xcconfig"))
 ]
+
+let targetBaseSettings: [String: SettingValue] = [
+    "PRODUCT_BUNDLE_IDENTIFIER": "$(inherited)",
+    "PRODUCT_NAME": "$(inherited)"
+]
