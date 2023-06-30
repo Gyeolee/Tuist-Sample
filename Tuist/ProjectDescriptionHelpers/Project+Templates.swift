@@ -97,33 +97,33 @@ extension Project {
             name: "Development",
             shared: true,
             buildAction: .buildAction(targets: ["\(appName)"]),
-            testAction: .targets([], configuration: .debugDevelopment),
-            runAction: .runAction(configuration: .debugDevelopment),
-            archiveAction: .archiveAction(configuration: .releaseDevelopment),
-            profileAction: .profileAction(configuration: .releaseDevelopment),
-            analyzeAction: .analyzeAction(configuration: .debugDevelopment)
+            testAction: .targets([], configuration: .developmentDebug),
+            runAction: .runAction(configuration: .developmentDebug),
+            archiveAction: .archiveAction(configuration: .developmentRelease),
+            profileAction: .profileAction(configuration: .developmentRelease),
+            analyzeAction: .analyzeAction(configuration: .developmentDebug)
         )
         
         let stagingScheme = Scheme(
             name: "Staging",
             shared: true,
             buildAction: .buildAction(targets: ["\(appName)"]),
-            testAction: .targets([], configuration: .debugStaging),
-            runAction: .runAction(configuration: .debugStaging),
-            archiveAction: .archiveAction(configuration: .releaseStaging),
-            profileAction: .profileAction(configuration: .releaseStaging),
-            analyzeAction: .analyzeAction(configuration: .debugStaging)
+            testAction: .targets([], configuration: .stagingDebug),
+            runAction: .runAction(configuration: .stagingDebug),
+            archiveAction: .archiveAction(configuration: .stagingRelease),
+            profileAction: .profileAction(configuration: .stagingRelease),
+            analyzeAction: .analyzeAction(configuration: .stagingDebug)
         )
         
         let productionScheme = Scheme(
             name: "Production",
             shared: true,
             buildAction: .buildAction(targets: ["\(appName)"]),
-            testAction: .targets([], configuration: .debugProduction),
-            runAction: .runAction(configuration: .debugProduction),
-            archiveAction: .archiveAction(configuration: .releaseProduction),
-            profileAction: .profileAction(configuration: .releaseProduction),
-            analyzeAction: .analyzeAction(configuration: .debugProduction)
+            testAction: .targets([], configuration: .productionDebug),
+            runAction: .runAction(configuration: .productionDebug),
+            archiveAction: .archiveAction(configuration: .productionRelease),
+            profileAction: .profileAction(configuration: .productionRelease),
+            analyzeAction: .analyzeAction(configuration: .productionDebug)
         )
         
         return [developmentScheme, stagingScheme, productionScheme]
