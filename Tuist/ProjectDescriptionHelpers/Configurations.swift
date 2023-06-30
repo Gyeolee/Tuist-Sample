@@ -19,16 +19,20 @@ extension ConfigurationName {
 private let basePath: String = "Projects/TuistSample/Config"
 
 let configurations: [Configuration] = [
-    .debug(name: .developmentDebug, xcconfig: .relativeToRoot("\(basePath)/Development/Development.xcconfig")),
-    .debug(name: .stagingDebug, xcconfig: .relativeToRoot("\(basePath)/Staging/Staging.xcconfig")),
-    .debug(name: .productionDebug, xcconfig: .relativeToRoot("\(basePath)/Production/Production.xcconfig")),
+    .debug(name: .developmentDebug, settings: debugBaseSettings, xcconfig: .relativeToRoot("\(basePath)/Development/Development.xcconfig")),
+    .debug(name: .stagingDebug, settings: debugBaseSettings, xcconfig: .relativeToRoot("\(basePath)/Staging/Staging.xcconfig")),
+    .debug(name: .productionDebug, settings: debugBaseSettings, xcconfig: .relativeToRoot("\(basePath)/Production/Production.xcconfig")),
     .release(name: .developmentRelease, xcconfig: .relativeToRoot("\(basePath)/Development/Development.xcconfig")),
     .release(name: .stagingRelease, xcconfig: .relativeToRoot("\(basePath)/Staging/Staging.xcconfig")),
     .release(name: .productionRelease, xcconfig: .relativeToRoot("\(basePath)/Production/Production.xcconfig"))
 ]
 
-let targetBaseSettings: [String: SettingValue] = [
+let targetBaseSettings: SettingsDictionary = [
     "PRODUCT_BUNDLE_IDENTIFIER": "$(inherited)",
     "INFOPLIST_KEY_CFBundleDisplayName": "$(inherited)",
     "GENERATE_INFOPLIST_FILE": "$(inherited)"
+]
+
+let debugBaseSettings: SettingsDictionary = [
+    "OTHER_LDFLAGS": ["-all_load", "-Xlinker", "-interposable"]
 ]
