@@ -11,7 +11,6 @@ extension ConfigurationName {
     static var debugDevelopment: ConfigurationName { configuration("Debug-Development") }
     static var debugStaging: ConfigurationName { configuration("Debug-Staging") }
     static var debugProduction: ConfigurationName { configuration("Debug-Production") }
-    
     static var releaseDevelopment: ConfigurationName { configuration("Release-Development") }
     static var releaseStaging: ConfigurationName { configuration("Release-Staging") }
     static var releaseProduction: ConfigurationName { configuration("Release-Production") }
@@ -30,5 +29,6 @@ let configurations: [Configuration] = [
 
 let targetBaseSettings: [String: SettingValue] = [
     "PRODUCT_BUNDLE_IDENTIFIER": "$(inherited)",
-    "PRODUCT_NAME": "$(inherited)"
+    "INFOPLIST_KEY_CFBundleDisplayName": "$(inherited)",
+    "GENERATE_INFOPLIST_FILE": "$(inherited)"
 ]

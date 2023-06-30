@@ -9,5 +9,10 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
+#include "../Base.xcconfig"
+
 PRODUCT_BUNDLE_IDENTIFIER = io.gyeolee.tuistsample.dev
-PRODUCT_NAME = Tuist[DEV]
+INFOPLIST_KEY_CFBundleDisplayName = Tuist[DEV]
+
+MARKETING_VERSION = 1.0.0
+CURRENT_PROJECT_VERSION = 1
