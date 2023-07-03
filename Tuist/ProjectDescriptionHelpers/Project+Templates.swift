@@ -61,7 +61,8 @@ extension Project {
             "CFBundleShortVersionString": "1.0",
             "CFBundleVersion": "1",
             "UIMainStoryboardFile": "",
-            "UILaunchStoryboardName": "LaunchScreen"
+            "UILaunchStoryboardName": "LaunchScreen",
+            "API_BASE_URL": "$(API_BASE_URL)"
         ]
 
         let mainTarget = Target(

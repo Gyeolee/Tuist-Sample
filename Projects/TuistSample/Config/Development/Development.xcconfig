@@ -11,8 +11,10 @@
 
 #include "../Base.xcconfig"
 
-PRODUCT_BUNDLE_IDENTIFIER = io.gyeolee.tuistsample.dev
-INFOPLIST_KEY_CFBundleDisplayName = Tuist[DEV]
+PRODUCT_BUNDLE_IDENTIFIER = $(BASE_BUNDLE_IDENTIFIER).dev
+INFOPLIST_KEY_CFBundleDisplayName = $(BASE_DISPLAY_NAME)[DEV]
 
 MARKETING_VERSION = 1.0.0
 CURRENT_PROJECT_VERSION = 1
+
+API_BASE_URL = https:/$()/gyeoleedev.io

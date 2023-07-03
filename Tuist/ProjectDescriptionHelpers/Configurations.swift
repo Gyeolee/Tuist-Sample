@@ -30,7 +30,8 @@ let configurations: [Configuration] = [
 let targetBaseSettings: SettingsDictionary = [
     "PRODUCT_BUNDLE_IDENTIFIER": "$(inherited)",
     "INFOPLIST_KEY_CFBundleDisplayName": "$(inherited)",
-    "GENERATE_INFOPLIST_FILE": "$(inherited)"
+    "GENERATE_INFOPLIST_FILE": "$(inherited)",
+    "API_BASE_URL": "$(inherited)"
 ]
 
 let debugBaseSettings: SettingsDictionary = [

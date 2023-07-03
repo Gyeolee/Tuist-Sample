@@ -9,4 +9,7 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
+BASE_BUNDLE_IDENTIFIER = io.gyeolee.tuistsample
+BASE_DISPLAY_NAME = Tuist
+
 GENERATE_INFOPLIST_FILE = YES
