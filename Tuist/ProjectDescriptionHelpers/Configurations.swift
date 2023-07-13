@@ -18,7 +18,7 @@ extension ConfigurationName {
 
 private let basePath: String = "Projects/TuistSample/Config"
 
-let configurations: [Configuration] = [
+public let appConfigurations: [Configuration] = [
     .debug(name: .developmentDebug, settings: debugBaseSettings, xcconfig: .relativeToRoot("\(basePath)/Development/Development.xcconfig")),
     .debug(name: .stagingDebug, settings: debugBaseSettings, xcconfig: .relativeToRoot("\(basePath)/Staging/Staging.xcconfig")),
     .debug(name: .productionDebug, settings: debugBaseSettings, xcconfig: .relativeToRoot("\(basePath)/Production/Production.xcconfig")),
@@ -27,13 +27,11 @@ let configurations: [Configuration] = [
     .release(name: .productionRelease, xcconfig: .relativeToRoot("\(basePath)/Production/Production.xcconfig"))
 ]
 
-let targetBaseSettings: SettingsDictionary = [
-    "PRODUCT_BUNDLE_IDENTIFIER": "$(inherited)",
-    "INFOPLIST_KEY_CFBundleDisplayName": "$(inherited)",
-    "GENERATE_INFOPLIST_FILE": "$(inherited)",
-    "API_BASE_URL": "$(inherited)"
-]
-
-let debugBaseSettings: SettingsDictionary = [
-    "OTHER_LDFLAGS": ["-all_load", "-Xlinker", "-interposable"]
+public let frameworkConfigurations: [Configuration] = [
+    .debug(name: .developmentDebug),
+    .debug(name: .stagingDebug),
+    .debug(name: .productionDebug),
+    .release(name: .developmentRelease),
+    .release(name: .stagingRelease),
+    .release(name: .productionRelease)
 ]

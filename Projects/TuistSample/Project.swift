@@ -27,5 +27,8 @@ let localHelper = LocalHelper(name: "MyPlugin")
 let project = Project.app(
     name: "TuistSample",
     platform: .iOS,
-    additionalTargets: ["TuistSampleKit", "TuistSampleUI"]
+    additionalTargets: ["TuistSampleKit", "TuistSampleUI"],
+    dependencies: [
+        .project(target: "Resources", path: .relativeToCurrentFile("../Resources"))
+    ]
 )

@@ -6,56 +6,64 @@ import ProjectDescription
 /// See https://docs.tuist.io/guides/helpers/
 
 extension Project {
-    /// Helper function to create the Project for this ExampleApp
-    public static func app(name: String, platform: Platform, additionalTargets: [String]) -> Project {
+    
+    public static func app(name: String,
+                           platform: Platform,
+                           additionalTargets: [String],
+                           dependencies: [TargetDependency] = []) -> Project {
         var targets = makeAppTargets(
             name: name,
             platform: platform,
-            dependencies: additionalTargets.map { TargetDependency.target(name: $0) }
+            dependencies: additionalTargets.map { TargetDependency.target(name: $0) } + dependencies
         )
-        targets += additionalTargets.flatMap { makeFrameworkTargets(name: $0, platform: platform) }
+        targets += additionalTargets.flatMap {
+            makeFrameworkTargets(name: $0, platform: platform, dependencies: dependencies)
+        }
         
         return Project(
             name: name,
             organizationName: "tuist.io",
             options: .options(automaticSchemesOptions: .disabled),
-            settings: .settings(configurations: configurations),
+            settings: .settings(configurations: appConfigurations),
             targets: targets,
             schemes: makeAppSchemes(appName: name)
         )
     }
-
-    // MARK: - Private
-
-    /// Helper function to create a framework target and an associated unit test target
-    private static func makeFrameworkTargets(name: String, platform: Platform) -> [Target] {
-        let sources = Target(
+    
+    public static func framework(name: String,
+                                 platform: Platform,
+                                 additionalTargets: [String]) -> Project {
+        let target = Target(
             name: name,
             platform: platform,
             product: .framework,
             bundleId: "io.tuist.\(name)",
             infoPlist: .default,
-            sources: ["Targets/\(name)/Sources/**"],
-            resources: [],
+            sources: ["Sources/**"],
+            resources: ["Resources/**"],
             dependencies: []
         )
         
-        let tests = Target(
-            name: "\(name)Tests",
-            platform: platform,
-            product: .unitTests,
-            bundleId: "io.tuist.\(name)Tests",
-            infoPlist: .default,
-            sources: ["Targets/\(name)/Tests/**"],
-            resources: [],
-            dependencies: [.target(name: name)]
+        return Project(
+            name: name,
+            organizationName: "tuist.io",
+            options: .options(automaticSchemesOptions: .disabled),
+            settings: .settings(configurations: frameworkConfigurations),
+            targets: [target],
+            resourceSynthesizers: [
+                .fonts()
+            ]
         )
-        
-        return [sources]
     }
+}
 
-    /// Helper function to create the application target and the unit test target.
-    private static func makeAppTargets(name: String, platform: Platform, dependencies: [TargetDependency]) -> [Target] {
+extension Project {
+    
+    // MARK: - Targets
+    
+    private static func makeAppTargets(name: String,
+                                       platform: Platform,
+                                       dependencies: [TargetDependency]) -> [Target] {
         let platform: Platform = platform
         let infoPlist: [String: InfoPlist.Value] = [
             "CFBundleShortVersionString": "1.0",
@@ -74,7 +82,7 @@ extension Project {
             sources: ["Targets/\(name)/Sources/**"],
             resources: ["Targets/\(name)/Resources/**"],
             dependencies: dependencies,
-            settings: .settings(base: targetBaseSettings, configurations: configurations)
+            settings: .settings(base: appTargetBaseSettings, configurations: appConfigurations)
         )
 
         let testTarget = Target(
@@ -89,9 +97,39 @@ extension Project {
         
         return [mainTarget]
     }
+
+    private static func makeFrameworkTargets(name: String,
+                                             platform: Platform,
+                                             dependencies: [TargetDependency]) -> [Target] {
+        let sources = Target(
+            name: name,
+            platform: platform,
+            product: .framework,
+            bundleId: "io.tuist.\(name)",
+            infoPlist: .default,
+            sources: ["Targets/\(name)/Sources/**"],
+            resources: [],
+            dependencies: dependencies
+        )
+        
+        let tests = Target(
+            name: "\(name)Tests",
+            platform: platform,
+            product: .unitTests,
+            bundleId: "io.tuist.\(name)Tests",
+            infoPlist: .default,
+            sources: ["Targets/\(name)/Tests/**"],
+            resources: [],
+            dependencies: [.target(name: name)]
+        )
+        
+        return [sources]
+    }
 }
 
 extension Project {
+    
+    // MARK: Schemes
     
     private static func makeAppSchemes(appName: String) -> [Scheme] {
         let developmentScheme = Scheme(
