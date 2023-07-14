@@ -17,4 +17,8 @@ INFOPLIST_KEY_CFBundleDisplayName = $(BASE_DISPLAY_NAME)[STAGE]
 MARKETING_VERSION = 1.0.0
 CURRENT_PROJECT_VERSION = 1
 
+
+// MARK: User-Defined
+
 API_BASE_URL = https:/$()/gyeoleestage.io
+BUNDLE_URL_SCHEME = tuistsamplestaging

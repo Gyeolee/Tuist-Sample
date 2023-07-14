@@ -70,6 +70,13 @@ extension Project {
             "CFBundleVersion": "1",
             "UIMainStoryboardFile": "",
             "UILaunchStoryboardName": "LaunchScreen",
+            "CFBundleURLTypes": [
+                .dictionary([
+                    "CFBundleTypeRole": .string("Editor"),
+                    "CFBundleURLName": .string("${PRODUCT_BUNDLE_IDENTIFIER}"),
+                    "CFBundleURLSchemes": .array([.string("${BUNDLE_URL_SCHEME}")]),
+                ]),
+            ],
             "API_BASE_URL": "$(API_BASE_URL)"
         ]
 
