@@ -10,6 +10,7 @@
 // https://help.apple.com/xcode/#/dev745c5c974
 
 GENERATE_INFOPLIST_FILE = YES
+//DEVELOPMENT_TEAM = {TEAM_ID}
 
 
 // MARK: User-Defined
