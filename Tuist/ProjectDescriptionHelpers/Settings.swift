@@ -8,7 +8,6 @@
 import ProjectDescription
 
 public let appTargetBaseSettings: SettingsDictionary = [
-    "PRODUCT_BUNDLE_IDENTIFIER": "$(inherited)",
     "INFOPLIST_KEY_CFBundleDisplayName": "$(inherited)",
     "GENERATE_INFOPLIST_FILE": "$(inherited)",
     "API_BASE_URL": "$(inherited)"

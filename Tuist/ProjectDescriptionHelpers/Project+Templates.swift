@@ -84,7 +84,7 @@ extension Project {
             name: name,
             platform: platform,
             product: .app,
-            bundleId: "",
+            bundleId: "$(PRODUCT_BUNDLE_IDENTIFIER)",
             infoPlist: .extendingDefault(with: infoPlist),
             sources: ["Targets/\(name)/Sources/**"],
             resources: ["Targets/\(name)/Resources/**"],
